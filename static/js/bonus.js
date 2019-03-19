@@ -23,6 +23,7 @@ function buildGauge(wfreq) {
         x: [0], y: [0],
         marker: { size: 28, color: '850000' },
         showlegend: false,
+        name: 'Weekly Washings',
         text: wfreq,
         hoverinfo: 'text'
     },
@@ -33,14 +34,13 @@ function buildGauge(wfreq) {
         textinfo: 'text',
         textposition: 'inside',
         marker: {
-            colors: ['rgba(5, 40, 0, .5)',
-                'rgba(8, 70, 0, .5)', 'rgba(10, 100, 0, .5)',
-                'rgba(14, 127, 0, .5)', 'rgba(110, 154, 22, .5)',
-                'rgba(170, 202, 42, .5)', 'rgba(202, 209, 95, .5)',
-                'rgba(210, 206, 145, .5)', 'rgba(232, 226, 202, .5)',
-                'rgba(255, 255, 255, 0)']
+            colors: ['rgb(59, 252, 68)', 'rgb(133, 252, 59)',
+                'rgb(165, 252, 59)', 'rgb(219, 252, 59)', 
+                'rgb(248, 252, 59)',  'rgb(252, 203, 59)', 
+                'rgb(252, 174, 59)', 'rgb(252, 97, 59)', 
+                'rgb(252, 68, 59)', 'rgba(255, 255, 255, 0)']
         },
-        labels: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
+        labels: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ' '],
         hoverinfo: 'label',
         hole: .5,
         type: 'pie',

@@ -1,29 +1,33 @@
 function buildMetadata(sample) {
 
-//  @TODO: Complete the following function that builds the metadata panel
+  // @TODO: Complete the following function that builds the metadata panel
   var url = `/metadata/${sample}`;
-//  Use d3 to select the panel with id of `#sample-metadata`
-  d3.json(url).then(function(sample) {
-//  Use d3 to select the panel with id of `#sample-metadata`
+
+  // Use `d3.json` to fetch the metadata for a sample
+  d3.json(url).then(function(response) {
+
+    // Use d3 to select the panel with id of `#sample-metadata`
     var newMetadata = d3.select("#sample-metadata");
 
-//  Clear any existing metadata
+    // Use `.html("") to clear any existing metadata
     newMetadata.html("");
 
     // Use `Object.entries` to add each key and value pair to the panel
-    Object.entries(sample).forEach(function ([key, value]) {
+    // Hint: Inside the loop, you will need to use d3 to append new
+    // tags for each key-value in the metadata.
+    Object.entries(response).forEach(([key, value]) => {
       newMetadata.append("p").text(`${key}: ${value}`);
-
     });
 
     // Create Gauge plot
     var wfreq = response['WFREQ'];
 
-    buildGauge(wfreq)  
+    buildGauge(wfreq)
   });
-}
+};
 
 function buildCharts(sample) {
+
   // @TODO: Use `d3.json` to fetch the sample data for the plots
   var url2 = `/samples/${sample}`;
 
@@ -56,25 +60,26 @@ function buildCharts(sample) {
     var bubbleData= [trace];
 
     Plotly.newPlot("bubble", bubbleData, layout);
+
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
-    
-    var trace2 = {
-      values: response.sample_values.slice(0,10),
-      labels: response.otu_ids.slice(0,10),
-      hovertext: response.otu_labels.slice(0,10),
-      type: "pie"
-    };
 
-    var pieData = [trace2];
+    var trace2 = {
+      values: response['sample_values'].slice(0, 10),
+      labels: response['otu_ids'].slice(0, 10),
+      hovertext: response['otu_labels'].slice(0, 10),
+      type: 'pie'
+    };
 
     var layout = {
       title: `Bacteria Found in Sample ${sample}`
     }
-  
-    Plotly.plot("pie", pieData, layout);
-  });   
+
+    var pieData = [trace2];
+
+    Plotly.newPlot("pie", pieData, layout)
+  });
 }
 
 function init() {

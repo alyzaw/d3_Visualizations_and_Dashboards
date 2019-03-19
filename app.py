@@ -13,7 +13,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-
 #################################################
 # Database Setup
 #################################################
@@ -90,7 +89,7 @@ def samples(sample):
     sample_data = df.loc[df[sample] > 1, ["otu_id", "otu_label", sample]]
     # Format the data to send as json
     data = {"otu_ids": sample_data["otu_id"].values.tolist(),
-            "otu_label": sample_data["otu_label"].values.tolist(),
+            "otu_labels": sample_data["otu_label"].values.tolist(),
             "sample_values": sample_data[sample].values.tolist(),
     }
     return jsonify(data)
